@@ -1,0 +1,254 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+# TIMER
+alias work="timer 60m && terminal-notifier -message 'Pomodoro'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+        
+alias rest="timer 10m && terminal-notifier -message 'Pomodoro'\
+        -title 'Break is over! Get back to work 😬'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+
+# KITTY CONF
+alias theme="kitty +kitten themes --reload-in=all" # then add theme name
+alias icat="kitty +kitten icat" # then add image name
+alias connect="kitty +kitten ssh"
+alias lint="golangci-lint run"
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+plugin=(
+  pyenv
+)
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cls="clear"
+alias py="python"
+alias flushdns= "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+alias emacs="emacs -nw"
+
+gcap() {
+    git add . && git commit -m "$*" && git push
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+eval "$(rbenv init - zsh)"
+
+# Created by `pipx` on 2022-12-03 01:28:09
+export PATH="$PATH:/Users/gaetanfox/.local/bin"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+alias vim=nvim
+alias pa="php artisan"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# Laravel
+export PATH=~/.composer/vendor/bin:$PATH
+# bun completions
+[ -s "/Users/gaetanfox/.bun/_bun" ] && source "/Users/gaetanfox/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+# Homebrew
+export GOROOT="$(brew --prefix golang)/libexec"
+# Manual install
+# export GOROOT=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+eval "$(zoxide init zsh)"
+
+
+
+# Herd injected PHP binary.
+export PATH="/Users/gaetanfox/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/gaetanfox/Library/Application Support/Herd/config/php/82/"
+
+PATH=~/.console-ninja/.bin:$PATH
+alias fabric='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/fabric'
+
+alias fabric-api='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/fabric-api'
+
+alias fabric-webui='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/fabric-webui'
+
+alias yt='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/yt'
+alias check_agreement='fabric --pattern check_agreement'
+alias label_and_rate='fabric --pattern label_and_rate'
+alias philocapsulate='fabric --pattern philocapsulate'
+alias extract_ideas='fabric --pattern extract_ideas'
+alias analyze_threat_report='fabric --pattern analyze_threat_report'
+alias create_npc='fabric --pattern create_npc'
+alias analyze_prose='fabric --pattern analyze_prose'
+alias create_aphorisms='fabric --pattern create_aphorisms'
+alias create_markmap_visualization='fabric --pattern create_markmap_visualization'
+alias analyze_prose_json='fabric --pattern analyze_prose_json'
+alias summarize_micro='fabric --pattern summarize_micro'
+alias extract_sponsors='fabric --pattern extract_sponsors'
+alias extract_article_wisdom='fabric --pattern extract_article_wisdom'
+alias extract_wisdom='fabric --pattern extract_wisdom'
+alias analyze_claims='fabric --pattern analyze_claims'
+alias create_threat_model='fabric --pattern create_threat_model'
+alias write_semgrep_rule='fabric --pattern write_semgrep_rule'
+alias compare_and_contrast='fabric --pattern compare_and_contrast'
+alias summarize='fabric --pattern summarize'
+alias create_mermaid_visualization='fabric --pattern create_mermaid_visualization'
+alias extract_videoid='fabric --pattern extract_videoid'
+alias write_essay='fabric --pattern write_essay'
+alias create_keynote='fabric --pattern create_keynote'
+alias rate_content='fabric --pattern rate_content'
+alias create_video_chapters='fabric --pattern create_video_chapters'
+alias summarize_rpg_session='fabric --pattern summarize_rpg_session'
+alias create_visualization='fabric --pattern create_visualization'
+alias ai='fabric --pattern ai'
+alias extract_references='fabric --pattern extract_references'
+alias summarize_pull-requests='fabric --pattern summarize_pull-requests'
+alias extract_poc='fabric --pattern extract_poc'
+alias improve_writing='fabric --pattern improve_writing'
+alias find_hidden_message='fabric --pattern find_hidden_message'
+alias summarize_git_changes='fabric --pattern summarize_git_changes'
+alias extract_recommendations='fabric --pattern extract_recommendations'
+alias rate_value='fabric --pattern rate_value'
+alias analyze_paper='fabric --pattern analyze_paper'
+alias explain_code='fabric --pattern explain_code'
+alias analyze_threat_report_trends='fabric --pattern analyze_threat_report_trends'
+alias create_command='fabric --pattern create_command'
+alias clean_text='fabric --pattern clean_text'
+alias improve_prompt='fabric --pattern improve_prompt'
+alias analyze_incident='fabric --pattern analyze_incident'
+alias explain_docs='fabric --pattern explain_docs'
+alias create_logo='fabric --pattern create_logo'
+alias summarize_newsletter='fabric --pattern summarize_newsletter'
+alias agility_story='fabric --pattern agility_story'
+alias analyze_spiritual_text='fabric --pattern analyze_spiritual_text'
+# nixpkgs -iA packageName
+alias nixpkgs="nix-env -f '<nixpkgs>'"
+
+alias em="emacsclient -c"
+
