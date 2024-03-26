@@ -1,0 +1,44 @@
+# bsp, stack, float
+yabai -m config layout bsp
+
+yabai -m config window_placement second_child
+
+# autobalance
+yabai -m config auto_balance on
+
+# padding
+yabai -m config top_padding 12
+yabai -m config bottom_padding 12
+yabai -m config left_padding 12
+yabai -m config right_padding 12
+yabai -m config window_gap 12
+
+# mouse settings (the moue will move to the focused window)
+yabai -m config mouse_follows_focus on
+
+
+# yabai -m config mouse_modifier alt
+# left click + drag
+# yabai -m config mouse_action1 move
+# right click + drag
+# yabai -m config mouse_action2 resize
+
+# when a window is dragged at the center of another window, they swap
+yabai -m mouse_drop_action swap
+
+# list of apps I don't want to be managedyabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^QuickTime Player$" manage=off
+yabai -m rule --add app="^Upwork$" manage=off
+yabai -m rule --add app="^VLC$" manage=off
+yabai -m rule --add app="^Adobe$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Todoist$" manage=off
+yabai -m rule --add app="^Telegram$" manage=off
+yabai -m rule --add app="^Godot$" manage=off
+yabai -m rule --add app="^Figma$" manage=off
+yabai -m rule --add app="^Unreal$" manage=off
+yabai -m rule --add app="^Blender$" manage=off
+yabai -m rule --add app="^Keymapp$" manage=off
