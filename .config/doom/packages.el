@@ -63,7 +63,6 @@
 (package! catppuccin-theme)
 (package! org-modern)
 (package! beacon)
-(package! all-the-icons)
+(package! focus)
 (package! all-the-icons-dired)
 (package! org-download)
-(package! focus)

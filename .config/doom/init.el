@@ -201,7 +201,6 @@
 
        :config
        ;;literate
-       focus
        (default +bindings +smartparens)
 
 )
