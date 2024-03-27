@@ -199,6 +199,7 @@ alias fabric-api='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/fa
 alias fabric-webui='/Users/gaetanfox/.pyenv/versions/3.11.0/envs/playground/bin/fabric-webui'
 
 alias cd=z
+alias s="kitten ssh"
 
 # pnpm
 export PNPM_HOME="/Users/gaetanfox/Library/pnpm"
@@ -206,6 +207,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+# pnpm end
 source ~/powerlevel10k/powerlevel10k.zsh-theme
