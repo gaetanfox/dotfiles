@@ -193,7 +193,6 @@
         org-todo-keywords
         '((sequence
            "TODO(t/!)"           ; A task that is ready to be tackled
-           "Follow up(f/!)"           ; A task that is ready to be tackled
            "PROG(p/!)"           ; A task that is in progress
            "WAIT(w/!)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
@@ -299,16 +298,6 @@
           ("v" "clip to inbox" entry
            (file "~/org/inbox.org")
            "* %x%?")
-          ("w" "Work todo" entry
-           (file "~/org/work.org")
-           "* TODO %?")
-          ("f" "freshdesk" entry
-           (file "~/org/work.org")
-           "* TODO %^{Ticket Number} - %^{Description}
-           :PROPERTIES:
-           :LINK: https://scrapinghub.freshdesk.com/a/tickets/%\\1
-           :END:
-           :LOGBOOK:\n - Added - %U\n :END:\n  ")
           )
         )
 )
@@ -450,22 +439,3 @@
       (insert (+workspace--tabline))))
   (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
   (+workspace/display))
-(use-package git-auto-commit-mode
-    :ensure t)
-;; TABS
-(setq centaur-tabs-set-bar 'under
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-(map! :leader
-      :desc "Toggle tabs globally" "t c" #'centaur-tabs-mode
-      :desc "Create new tab" "t n" #'centaur-tabs--create-new-tab
-      :desc "Kill the tab buffer" "t d" #'centaur-tabs--kill-this-buffer-dont-ask
-      :desc "Toggle tabs local display" "t C" #'centaur-tabs-local-mode)
-(evil-define-key 'normal centaur-tabs-mode-map (kbd "g <right>") 'centaur-tabs-forward        ; default Doom binding is 'g t'
-                                               (kbd "g <left>")  'centaur-tabs-backward       ; default Doom binding is 'g T'
-                                               (kbd "g <down>")  'centaur-tabs-forward-group
-                                               (kbd "g <up>")    'centaur-tabs-backward-group)

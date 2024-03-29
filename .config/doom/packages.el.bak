@@ -67,5 +67,3 @@
 (package! all-the-icons-dired)
 (package! org-download)
 (package! focus)
-(package! blacken)
-(package! git-auto-commit)
