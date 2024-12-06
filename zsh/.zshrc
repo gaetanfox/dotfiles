@@ -17,7 +17,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(zsh-syntax-highlighting zsh-autosuggestions fzf-zsh-plugin)
+plugins=(zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -32,10 +32,9 @@ alias gs="git status"
 alias ta="tmux attach-session -t"
 alias tl="tmux list-sessions"
 
-function tda() {
-  tmux detach \; attach-session -t "$1"
+tda() {
+  tmux new-session -s "$(basename $(pwd))"
 }
-
 # eza (better 'ls')
 alias l="eza --icons"
 alias ls="eza --icons"
