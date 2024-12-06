@@ -29,6 +29,13 @@ alias v="nvim"
 alias cd="z"
 alias gs="git status"
 
+alias ta="tmux attach-session -t"
+alias tl="tmux list-sessions"
+
+function tda() {
+  tmux detach \; attach-session -t "$1"
+}
+
 # eza (better 'ls')
 alias l="eza --icons"
 alias ls="eza --icons"
