@@ -61,6 +61,17 @@ zle -N popup_sesh
 # Keybinding for popup_sesh
 bindkey '^S' popup_sesh
 
+# Define a widget that runs the command
+function run_tmux_sessionizer() {
+  ~/./tmux-sessionizer
+}
+
+# Register the widget with zle
+zle -N run_tmux_sessionizer
+
+# Bind Ctrl+F to the run_tmux_sessionizer widget
+bindkey '^F' run_tmux_sessionizer
+
 # Function: gcap
 gcap() {
     git add . && git commit -m "$1" && git push
