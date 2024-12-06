@@ -17,7 +17,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(zsh-syntax-highlighting zsh-autosuggestions fzf-zsh-plugin)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -66,14 +66,16 @@ gcap() {
     git add . && git commit -m "$1" && git push
 }
 
+# Set PATH environment variables
+export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin:$GOPATH/bin"
+export PATH="$PATH:/Users/gaetanfox/.local/bin" # Added by pipx on 2024-11-24 10:59:05
+export PATH="$PATH:/opt/homebrew/bin:$PATH" # Added by pipx on 2024-11-24 10:59:05
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # zoxide initialization for Zsh
 eval "$(zoxide init zsh)"
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
-# Set PATH environment variables
-export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin:$GOPATH/bin"
-export PATH="$PATH:/Users/gaetanfox/.local/bin" # Added by pipx on 2024-11-24 10:59:05
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
