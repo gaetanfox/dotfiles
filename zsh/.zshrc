@@ -24,7 +24,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 alias cls="clear"
-alias py="python"
+alias py="python3"
 alias v="nvim"
 alias cd="z"
 alias gs="git status"
