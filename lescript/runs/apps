@@ -1,0 +1,4 @@
+sudo pacman -Sy yay
+yay -Syyuu
+
+yay -S
