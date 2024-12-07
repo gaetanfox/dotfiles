@@ -51,21 +51,22 @@ alias lta3="eza -lTag --level=3 --icons"
 
 alias k="kubectl"
 
-# Function: popup_sesh
-popup_sesh() {
-    local selected_sesh=$(
-        sesh list -i | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
-    )
-    if [[ -n "$selected_sesh" ]]; then
-        sesh connect "$selected_sesh"
-    fi
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
 }
 
-# Turn popup_sesh into a Zsh widget
-zle -N popup_sesh
+zle     -N             sesh-sessions
 
 # Keybinding for popup_sesh
-bindkey '^S' popup_sesh
+bindkey '^S' sesh-sessions
 
 # Define a widget that runs the command
 function run_tmux_sessionizer() {
