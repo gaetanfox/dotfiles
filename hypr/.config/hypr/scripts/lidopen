@@ -1,1 +1,7 @@
-hyprctl keyword monitor "eDP-1, enable"
+#!/bin/bash
+
+# Wait for 2 seconds
+sleep 2
+
+# Execute the command
+hyprctl keyword monitor "eDP-1, enable" && killall waybar && waybar -c .config/waybar/config-hypr &
