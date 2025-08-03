@@ -1,4 +1,0 @@
-sudo pacman -Sy yay
-yay -Syyuu
-
-yay -S mosh tmux cmake gum vlc microsoft-edge-dev kitty alacritty tailscale steam python-pipx go gopls sesh-bin discord slack-desktop-wayland stow network-manager-applet thunar bat tldr fzf zoxide

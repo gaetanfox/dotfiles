@@ -23,12 +23,19 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+alias em='emacsclient -c -a ""'
+alias et='emacsclient -t -a ""'
+alias e='/opt/homebrew/bin/emacsclient -n -c -a ""'
+
 alias cls="clear"
-alias py="uv venv exec python"
-alias python="uv venv exec python"
+alias py="uv run "
+alias python="uv "
 alias v="nvim"
 alias cd="z"
 alias gs="git status"
+
+alias glow="glow -t "
+
 
 alias ta="tmux attach-session -t"
 alias tl="tmux list-sessions"
@@ -101,23 +108,31 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 alias pip="uv pip"
 export UV_AUTO_VENV=1
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/gaetanfox/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+PATH=~/.console-ninja/.bin:$PATH
+# Added by Windsurf
+export PATH="/Users/gaetanfox/.codeium/windsurf/bin:$PATH"
+
+# Task Master aliases added on 6/25/2025
+alias tm='task-master'
+alias taskmaster='task-master'
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
+
+# bun
+export BUN_INSTALL="$HOME/Library/Application Support/reflex/bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
